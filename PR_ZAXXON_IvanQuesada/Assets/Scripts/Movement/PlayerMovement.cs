@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //Variables para el movimiento de la nave.
     [SerializeField] Vector3 playerPosition = new Vector3(0f, 0f, 0f);
-    public float desplSpeed = 60f;
+    public float desplSpeed = 100f;
 
     //Variables de restriccion.
     float limiteR = 57f;
