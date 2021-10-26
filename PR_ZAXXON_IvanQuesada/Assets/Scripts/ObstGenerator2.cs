@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstGenerator : MonoBehaviour
+public class ObstGenerator2 : MonoBehaviour
 {
-    [SerializeField] GameObject obstacle;
     [SerializeField] Transform initPos;
     float intervalo;
-    [SerializeField] GameObject[] arrayObst = new GameObject[5];
-    
+    [SerializeField] GameObject obstacle;
+    [SerializeField] float distEntreObst;
+    float speed;
+    InitGameScript initGameScript;
+
     // Start is called before the first frame update
     void Start()
     {
-        intervalo = 1.2f;
+        initGameScript = GameObject.Find("InitGame").GetComponent<InitGameScript>();
+        distEntreObst = 70f;
+        intervalo = distEntreObst / initGameScript.naveSpeed;
+
         StartCoroutine("CrearObst");
     }
 
@@ -21,13 +26,14 @@ public class ObstGenerator : MonoBehaviour
     {
         
     }
+
     IEnumerator CrearObst()
     {
         while (true)
         {
-            Instantiate(arrayObst[Random.Range(0, arrayObst.Length)], new Vector3(Random.Range(-57f, 57f), Random.Range(1f, 40f), initPos.position.z), Quaternion.identity);
+            Instantiate(obstacle, new Vector3(Random.Range(-57f, 57f), 20f, initPos.position.z), Quaternion.identity);
             yield return new WaitForSeconds(intervalo);
-            
+
         }
     }
 }
