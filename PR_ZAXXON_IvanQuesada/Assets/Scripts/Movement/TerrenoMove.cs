@@ -10,13 +10,12 @@ public class TerrenoMove : MonoBehaviour
 
     [SerializeField] GameObject terrenoPrefab;
 
-    Vector3 instPos = new Vector3(0f, -2.6f, 1000f);
+    Vector3 instPos = new Vector3(0f, -2.6f, 990f);
 
     // Start is called before the first frame update
     void Start()
     {
-        initGameScript = GameObject.Find("InitGame").GetComponent<InitGameScript>();
-       
+        initGameScript = GameObject.Find("InitGame").GetComponent<InitGameScript>();       
     }
 
     // Update is called once per frame
@@ -26,7 +25,7 @@ public class TerrenoMove : MonoBehaviour
 
         transform.Translate(Vector3.back * Time.deltaTime * speed);
 
-        if(transform.position.z <= -200)
+        if(transform.position.z <= -210)
         {
             Instantiate(terrenoPrefab, instPos, Quaternion.identity);
             Destroy(gameObject);

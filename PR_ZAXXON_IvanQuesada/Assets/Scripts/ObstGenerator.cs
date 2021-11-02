@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstGenerator : MonoBehaviour
 {
     [SerializeField] Transform initPos;
+   
     [SerializeField] GameObject[] arrayObst;
 
     float intervalo;
@@ -25,18 +26,22 @@ public class ObstGenerator : MonoBehaviour
         StartCoroutine("CrearObst");
     }
 
+    public void Parar()
+    {
+        StopCoroutine("CrearObst");
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     IEnumerator CrearObst()
     {
         while (true)
         {
             Instantiate(arrayObst[Random.Range(0, arrayObst.Length)], new Vector3(Random.Range(-57f, 57f), Random.Range(3f, 40f), initPos.position.z), Quaternion.identity);
-            yield return new WaitForSeconds(intervalo);
-            
+            yield return new WaitForSeconds(intervalo);            
         }
     }
 }

@@ -6,7 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     //Variables para el movimiento de la nave.
     [SerializeField] Vector3 playerPosition = new Vector3(0f, 0f, 0f);
-    public float desplSpeed = 100f;
+    [SerializeField] float desplSpeed;
+    
 
     //Variables de restriccion.
     float limiteR = 57f;
@@ -18,10 +19,16 @@ public class PlayerMovement : MonoBehaviour
     bool inLimitH = true;
     bool inLimitV = true;
 
+    InitGameScript initGameScript;
+
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = playerPosition;   
+        transform.position = playerPosition;
+
+        desplSpeed = 70f;
+
+        initGameScript = GameObject.Find("InitGame").GetComponent<InitGameScript>();
     }
 
     // Update is called once per frame
@@ -76,6 +83,14 @@ public class PlayerMovement : MonoBehaviour
         if (inLimitV)
         {
             transform.Translate(Vector3.up * Time.deltaTime * desplV * desplSpeed, Space.World);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            initGameScript.SendMessage("Morir");            
         }
     }
 }

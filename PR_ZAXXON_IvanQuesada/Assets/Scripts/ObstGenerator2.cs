@@ -5,10 +5,15 @@ using UnityEngine;
 public class ObstGenerator2 : MonoBehaviour
 {
     [SerializeField] Transform initPos;
+   
     float intervalo;
+   
     [SerializeField] GameObject obstacle;
+  
     [SerializeField] float distEntreObst;
+   
     float speed;
+   
     InitGameScript initGameScript;
 
     // Start is called before the first frame update
@@ -16,24 +21,31 @@ public class ObstGenerator2 : MonoBehaviour
     {
         initGameScript = GameObject.Find("InitGame").GetComponent<InitGameScript>();
         distEntreObst = 70f;
-        intervalo = distEntreObst / initGameScript.naveSpeed;
+        
 
-        StartCoroutine("CrearObst");
+        StartCoroutine("CrearObst2");
     }
 
+    public void Parar()
+    {
+        StopCoroutine("CrearObst2");
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        if (initGameScript.naveSpeed > 300)
+        {
+            distEntreObst = 80f;
+        }
+        intervalo = distEntreObst / initGameScript.naveSpeed;
     }
 
-    IEnumerator CrearObst()
+    IEnumerator CrearObst2()
     {
         while (true)
         {
             Instantiate(obstacle, new Vector3(Random.Range(-57f, 57f), 20f, initPos.position.z), Quaternion.identity);
             yield return new WaitForSeconds(intervalo);
-
         }
     }
 }

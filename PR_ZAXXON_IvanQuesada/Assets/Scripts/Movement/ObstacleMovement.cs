@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleMovement : MonoBehaviour
 {
     [SerializeField] GameObject initObject;
+   
     InitGameScript initGameScript;
 
     float obstacleSpeed;
