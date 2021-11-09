@@ -29,7 +29,7 @@ public class ObstacleMovement : MonoBehaviour
 
         float obstPosZ = transform.position.z;
 
-        if (obstPosZ < -27)
+        if (obstPosZ < -30)
         {
             Destroy(gameObject);
         }

@@ -10,8 +10,6 @@ public class TerrenoMove : MonoBehaviour
 
     [SerializeField] GameObject terrenoPrefab;
 
-    Vector3 instPos = new Vector3(0f, -2.6f, 990f);
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +25,12 @@ public class TerrenoMove : MonoBehaviour
 
         if(transform.position.z <= -210)
         {
+            float desfase = -210 - transform.position.z;
+
+            Vector3 instPos = new Vector3(0f, -2.6f, 990f - desfase);
+
             Instantiate(terrenoPrefab, instPos, Quaternion.identity);
+            
             Destroy(gameObject);
         }   
         

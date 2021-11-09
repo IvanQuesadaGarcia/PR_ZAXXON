@@ -14,10 +14,13 @@ public class PlayerMovement : MonoBehaviour
     float limiteL = -57f;
     float limiteU = 40f;
     float limiteD = 0f;
+    //float limiteRotU = -20f;
+    //float limiteRotD = 20f;
 
     //booleanas para saber si puedo moverme.
     bool inLimitH = true;
     bool inLimitV = true;
+    //bool inLimitRot = true;
 
     InitGameScript initGameScript;
 
@@ -34,14 +37,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movimiento();
-
-        //Variables de los ejes de rotación.
-        float rotationH = Input.GetAxis("Horizontal");
-        float rotationV = Input.GetAxis("Vertical");
-
-        //transform.Rotate(Vector3.back * Time.deltaTime * rotationH * 250f, Space.Self);
-        //transform.Rotate(Vector3.left * Time.deltaTime * rotationV * 250f, Space.Self);
+        Movimiento();    
     }
 
     // Método para el movimiento
@@ -50,11 +46,26 @@ public class PlayerMovement : MonoBehaviour
         //variables de los ejes de movimiento.
         float desplH = Input.GetAxis("Horizontal");
         float desplV = Input.GetAxis("Vertical");
+
+        /**
         
+        //Variables de los ejes de rotación.
+        float rotationV = Input.GetAxis("Vertical");
+        
+        //Variables para restringir la rotación.
+        float rotV = transform.rotation.x;  
+
+        //Rotación
+        transform.Rotate(Vector3.back * Time.deltaTime * 200f, Space.Self);
+        
+        **/
 
         //Variables de posición para restringir.
         float posX = transform.position.x;
-        float posY = transform.position.y;
+        float posY = transform.position.y;        
+
+       
+        
 
         //Movimiento restringido.
         if (posX > limiteR && desplH > 0 || posX < limiteL && desplH < 0)
@@ -84,6 +95,21 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Translate(Vector3.up * Time.deltaTime * desplV * desplSpeed, Space.World);
         }
+
+        //Rotación restringida
+        /**if (rotV > limiteRotU && rotationV > 0 || rotV < limiteRotD && rotationV < 0)
+        {
+            inLimitRot = false;
+        }
+        else
+        {
+            inLimitRot = true;
+        }
+
+        if (inLimitRot)
+        {
+          transform.Rotate(Vector3.left * Time.deltaTime * rotationV * 250f, Space.Self);  
+        }**/
     }
 
     private void OnTriggerEnter(Collider other)
