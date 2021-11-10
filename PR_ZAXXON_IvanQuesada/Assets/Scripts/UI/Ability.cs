@@ -42,7 +42,7 @@ public class Ability : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown("space") && ability1Charge == true)
+        if (Input.GetButtonDown("Fire1") && ability1Charge == true)
         {
             Ability1.value = 0f;
             print("dash");
@@ -62,7 +62,7 @@ public class Ability : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown("left shift") && ability2Charge == true)
+        if (Input.GetButtonDown("Fire2") && ability2Charge == true)
         {
             Ability2.value = 0f;
             print("dash");

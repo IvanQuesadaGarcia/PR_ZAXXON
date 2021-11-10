@@ -20,32 +20,20 @@ public class Botones : MonoBehaviour
 
     public void Jugar()
     {
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("enter"))
-        {
             SceneManager.LoadScene(1);
-        }
     }
 
     public void Opciones()
     {
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("enter"))
-        {
             SceneManager.LoadScene(2);
-        }
     }
     public void HighScores()
     {
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("enter"))
-        {
             SceneManager.LoadScene(3);
-        }
     }
 
     public void Regresar()
     {
-        if (Input.GetKeyDown("space") || Input.GetKeyDown("enter"))
-        {
             SceneManager.LoadScene(0);
-        }
     }
 }
