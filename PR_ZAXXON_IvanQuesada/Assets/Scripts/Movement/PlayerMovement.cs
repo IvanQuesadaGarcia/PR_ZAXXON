@@ -49,9 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
         /**
         
-        //Variables de los ejes de rotación.
-        float rotationV = Input.GetAxis("Vertical");
-        
         //Variables para restringir la rotación.
         float rotV = transform.rotation.x;  
 
@@ -110,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
         {
           transform.Rotate(Vector3.left * Time.deltaTime * rotationV * 250f, Space.Self);  
         }**/
+
+        transform.Rotate(Vector3.forward * Time.deltaTime * 50f, Space.Self);
     }
 
     private void OnTriggerEnter(Collider other)
