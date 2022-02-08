@@ -7,8 +7,8 @@ public class PlayerMovement : MonoBehaviour
     //Variables para el movimiento de la nave.
     [SerializeField] Vector3 playerPosition = new Vector3(0f, 0f, 0f);
     [SerializeField] float desplSpeed;
-    
-
+    [SerializeField] Transform nave;
+ 
     //Variables de restriccion.
     float limiteR = 57f;
     float limiteL = -57f;
@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     //bool inLimitRot = true;
 
     InitGameScript initGameScript;
+
+    [SerializeField] GameObject expl;
 
     // Start is called before the first frame update
     void Start()
@@ -115,7 +117,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            initGameScript.SendMessage("Morir");            
+            initGameScript.SendMessage("Morir");
+            Instantiate(expl, new Vector3(nave.position.x, nave.position.y, nave.position.z), Quaternion.identity);
         }
     }
 }

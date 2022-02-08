@@ -44,7 +44,7 @@ public class ObstGenerator2 : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(obstacle, new Vector3(Random.Range(-57f, 57f), 20f, initPos.position.z), Quaternion.identity);
+            Instantiate(obstacle, new Vector3(Random.Range(-57f, 57f), 23.5f, initPos.position.z), Quaternion.identity);
             yield return new WaitForSeconds(intervalo);
         }
     }
