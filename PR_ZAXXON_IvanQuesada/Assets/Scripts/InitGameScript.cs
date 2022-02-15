@@ -19,16 +19,28 @@ public class InitGameScript : MonoBehaviour
     static float score;
    
     [SerializeField] Text scoreText;
+    [SerializeField] Text scoreGO;
 
 
     [SerializeField] GameObject navePrefab;
 
     bool alive;
 
+    //Game over
+    GameObject GameOver;
+    [SerializeField] Button btnPlay;
+    [SerializeField] Sprite btnSelected;
+
+
     // Start is called before the first frame update
     void Start()
     {
         naveSpeed = 100f;
+
+        var video = GameObject.Find("Background").GetComponent<UnityEngine.Video.VideoPlayer>();
+
+        video.isLooping = true;
+        video.Play();
 
         int y = SceneManager.GetActiveScene().buildIndex;
         if (y == 0)
@@ -43,6 +55,11 @@ public class InitGameScript : MonoBehaviour
         float tiempoPasado = Time.time;
 
         scoreText.text = "Score: " + score;
+        scoreGO.text = "Score: " + score;
+
+        GameOver = GameObject.Find("GOparent");
+        
+        GameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,13 +79,24 @@ public class InitGameScript : MonoBehaviour
     //Morir
     public void Morir()
     {
+        var video = GameObject.Find("Background").GetComponent<UnityEngine.Video.VideoPlayer>();      
         naveSpeed = 0f;
         alive = false;
         ObstGenerator obstGenerator = GameObject.Find("ObstGenerator").GetComponent<ObstGenerator>();
-        ObstGenerator2 obstGenerator2 = GameObject.Find("ObstGenerator2").GetComponent<ObstGenerator2>();
+        ObstGenerator2 obstGenerator2 = GameObject.Find("ObstGenerator2").GetComponent<ObstGenerator2>();       
         obstGenerator.SendMessage("Parar");
         obstGenerator2.SendMessage("Parar");
         navePrefab.SetActive(false);
-        Destroy(gameObject);
+        video.playbackSpeed = 0f;
+
+        Invoke("ActivarGameOver", 2f);
+    }
+
+    void ActivarGameOver()
+    {
+        //CanvasGameOver.enabled = true;
+        GameOver.SetActive(true);
+        //btnPlay.image.sprite = btnSelected;
+        btnPlay.Select();
     }
 }
