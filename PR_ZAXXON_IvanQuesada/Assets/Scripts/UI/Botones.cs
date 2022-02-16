@@ -20,7 +20,8 @@ public class Botones : MonoBehaviour
 
     public void Jugar()
     {
-            SceneManager.LoadScene(1);
+        GameManager.score = 0;
+        SceneManager.LoadScene(1);
     }
 
     public void Opciones()
@@ -34,6 +35,7 @@ public class Botones : MonoBehaviour
 
     public void Regresar()
     {
-            SceneManager.LoadScene(0);
+       // InitGameScript.score = 0;
+        SceneManager.LoadScene(0);
     }
 }

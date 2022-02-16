@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int musicVolume = 5;
+    //Volumen
+    public static float musicVolume = 5;
+    
+    //Puntuación
+    public static float score;
+    public static float highscore;
 }
