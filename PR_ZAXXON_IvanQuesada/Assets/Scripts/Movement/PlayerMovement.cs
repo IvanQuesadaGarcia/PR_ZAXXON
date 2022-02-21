@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] GameObject expl;
 
+    //Audio
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSourceBG;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +49,6 @@ public class PlayerMovement : MonoBehaviour
         //variables de los ejes de movimiento.
         float desplH = Input.GetAxis("Horizontal");
         float desplV = Input.GetAxis("Vertical");
-       
-        //Variables para restringir la rotación.
-        float rotV = transform.rotation.x;
 
         //Variables de posición para restringir.
         float posX = transform.position.x;
@@ -87,12 +88,19 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(-50 * desplV, 0, -30 * desplH);     
     }
 
+    void PararMusica()
+    {
+        audioSourceBG.Stop();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6)
         {
+            audioSource.Play();
             initGameScript.SendMessage("Morir");
             Instantiate(expl, new Vector3(nave.position.x, nave.position.y, nave.position.z), Quaternion.identity);
+            Invoke("PararMusica", 2f);
         }
     }
 }

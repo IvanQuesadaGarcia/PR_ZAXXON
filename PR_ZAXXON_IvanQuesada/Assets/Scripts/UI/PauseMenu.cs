@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
-
+    
     bool gamePaused = false;
 
     [SerializeField] Button btnContinue, btnExit;
+    [SerializeField] AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +26,13 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire3"))
         {
-            print("pausa");
             AbrirMenu();
         }
     }
 
     void AbrirMenu()
     {
+        var video = GameObject.Find("Background").GetComponent<UnityEngine.Video.VideoPlayer>();
         if (!gamePaused)
         {
             gamePaused = true;
@@ -39,7 +40,9 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0f;
 
             pauseMenu.SetActive(true);
+            video.playbackSpeed = 0f;
             btnContinue.Select();
+            audioSource.volume = 0.1f;
         }
         else
         {
@@ -49,9 +52,8 @@ public class PauseMenu : MonoBehaviour
 
             pauseMenu.SetActive(false);
             btnExit.Select();
-        }
-
-        
+            audioSource.volume = 1f;
+        }  
     }
 
     public void Resume()
@@ -60,6 +62,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         btnExit.Select();
+        audioSource.volume = 1f;
     }
 
     public void Salir()

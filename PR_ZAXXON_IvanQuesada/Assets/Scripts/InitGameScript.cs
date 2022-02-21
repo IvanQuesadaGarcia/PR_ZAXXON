@@ -14,12 +14,8 @@ public class InitGameScript : MonoBehaviour
     public float naveSpeed;
 
     [SerializeField] float maxSpeed;
-
-    
    
     [SerializeField] Text scoreText;
-    [SerializeField] Text scoreGO;
-
 
     [SerializeField] GameObject navePrefab;
 
@@ -29,8 +25,7 @@ public class InitGameScript : MonoBehaviour
     //Game over
     GameObject GameOver;
     [SerializeField] Button btnPlay;
-    [SerializeField] Sprite btnSelected;
-
+    [SerializeField] Text scoreGO;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +48,6 @@ public class InitGameScript : MonoBehaviour
         tiempoPasado = Time.time;
 
         scoreText.text = "Score: 0";
-        scoreGO.text = "Score: 0";
 
         GameOver = GameObject.Find("GOparent");
         
@@ -70,11 +64,11 @@ public class InitGameScript : MonoBehaviour
 
         float tiempoReal = Time.time - tiempoPasado;
 
-        
-
         if(alive)
+        {
             GameManager.score = Mathf.Round(tiempoReal) * naveSpeed;
-        
+        }
+
         scoreText.text = "Score: " + Mathf.Round(GameManager.score);
     }
 
@@ -85,7 +79,7 @@ public class InitGameScript : MonoBehaviour
         alive = false;
         naveSpeed = 0f;        
         ObstGenerator obstGenerator = GameObject.Find("ObstGenerator").GetComponent<ObstGenerator>();
-        ObstGenerator2 obstGenerator2 = GameObject.Find("ObstGenerator2").GetComponent<ObstGenerator2>();       
+        ObstGenerator2 obstGenerator2 = GameObject.Find("ObstGenerator2").GetComponent<ObstGenerator2>();
         obstGenerator.SendMessage("Parar");
         obstGenerator2.SendMessage("Parar");
         navePrefab.SetActive(false);
@@ -103,5 +97,6 @@ public class InitGameScript : MonoBehaviour
     {
         GameOver.SetActive(true);
         btnPlay.Select();
+        scoreGO.text = "Score: " + Mathf.Round(GameManager.score);
     }
 }
